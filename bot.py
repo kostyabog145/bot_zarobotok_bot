@@ -4,7 +4,7 @@ from datetime import datetime
 from datetime import timedelta 
 import smtplib
 
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(str(token))
 
 @bot.message_handler(commands=['start'])
 def start(message):
