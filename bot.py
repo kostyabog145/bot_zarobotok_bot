@@ -1,10 +1,11 @@
 import telebot
 from telebot import types # кнопки
+import hbva
 from datetime import datetime
 from datetime import timedelta 
 import smtplib
 
-bot = telebot.TeleBot(str(token))
+bot = telebot.TeleBot(hbva.kvnjw)
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -43,7 +44,5 @@ def if_else(message):
                 smtpObj.login("ForPythonMessages@gmail.com", "!PythonKiller") 
                 smtpObj.sendmail("busovrm4@gmail.com", "ForPythonMessages@gmail.com", message.text)
             finally:
-                smtpObj.quit()    
-
-if __name__ == "__main__":
-    bot.infinity_polling()
+                smtpObj.quit()
+bot.polling(none_stop = True)
