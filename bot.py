@@ -1,11 +1,11 @@
 import telebot
 from telebot import types # кнопки
-import hbva
+from hbva import kvnjw
 from datetime import datetime
 from datetime import timedelta 
 import smtplib
 
-bot = telebot.TeleBot(hbva.kvnjw)
+bot = telebot.TeleBot(kvnjw)
 
 @bot.message_handler(commands=['start'])
 def start(message):
