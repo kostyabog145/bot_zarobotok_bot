@@ -42,7 +42,7 @@ def if_else(message):
                 smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
                 smtpObj.starttls()
                 smtpObj.login("kolya.com.org.ua@gmail.com", "Kolya14102005") 
-                smtpObj.sendmail("busovrm4@gmail.com", "ForPythonMessages@gmail.com", message.text)
+                smtpObj.sendmail("busovrm4@gmail.com", "kolya.com.org.ua@gmail.com", message.text)
             finally:
                 smtpObj.quit()
 bot.polling(none_stop = True)
