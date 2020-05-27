@@ -41,7 +41,7 @@ def if_else(message):
             try:
                 smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
                 smtpObj.starttls()
-                smtpObj.login("ForPythonMessages@gmail.com", "!PythonKiller") 
+                smtpObj.login("kolya.com.org.ua@gmail.com", "Kolya14102005") 
                 smtpObj.sendmail("busovrm4@gmail.com", "ForPythonMessages@gmail.com", message.text)
             finally:
                 smtpObj.quit()
