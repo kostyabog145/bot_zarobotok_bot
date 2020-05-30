@@ -18,6 +18,10 @@ def start(message):
     murkup_inline.add(button_yes, button_no) # добавляем в клавиатуру кнопки
     bot.send_message(message.chat.id, 'Но для начала,нам нужно твое соглашение на получение от нас писем. Ты готов получать все самые новые виды зароботка на почту ?', reply_markup = murkup_inline)
 
+@bot.message_handler(commands=['statistic'])
+def statistic(message):
+    bot.send_message(message.chat.id, 'До начала рассылки осталось : 994/1000 email-адресов в базе')
+
 @bot.callback_query_handler(func = lambda call : True)
 def yes_or_no(call):
     if call.data == 'yes':
@@ -31,22 +35,28 @@ def yes_or_no(call):
         bot.send_message(call.message.chat.id, 'Очень жаль что вам это не интересно 😭')
 
 @bot.message_handler(content_types=['text'])
-def if_else(message):
+def all(message):
     if message.text.lower() == 'регистрация':
-        bot.send_message(message.chat.id, 'Для регистрации укажите ваш email,куда мы сможем вам отправлять информацию 😏')
+        bot.send_message(message.chat.id, 'Для регистрации укажите ваш email,куда мы сможем вам отправлять информацию 😏') 
 
     for baza in message.text:
         baza_email = []
         if baza == '@':
             bot.send_message(message.chat.id, 'Спасибо,что остались с нами. Вы точно не пожалеете😉')
-            baza_email.append(message.text)
+            bot.send_message(message.chat.id, 'Если хочешь узнать когда начнется рассылка -> Введи команду : /statistic')
+            baza_email.append(f'\n {message.text}')
+            date = datetime.now()
+            date_now_hour = date.hour
+            date_now_min = date.minute
+            if date_now_hour and date_now_min == 23:
+                try:
+                    smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
+                    smtpObj.starttls()
+                    smtpObj.login("kolya.com145@gmail.com", "Kolya14102005") 
+                    for i in baza_email:
+                        smtpObj.sendmail("kolya.com145@gmail.com", "kolya.com145@gmail.com", i)
+                finally:
+                    smtpObj.quit()          
 
-    elif message.text.lower() == 'отправка':
-        try:
-            smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
-            smtpObj.starttls()
-            smtpObj.login("kolya.com145@gmail.com", "Kolya14102005") 
-            smtpObj.sendmail("busovrm4@gmail.com", "kolya.com145@gmail.com", baza_email)
-        finally:
-            smtpObj.quit()
-bot.polling(none_stop = True)
+if __name__ == "__main__":
+    bot.infinity_polling()
