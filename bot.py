@@ -34,29 +34,31 @@ def yes_or_no(call):
     elif call.data == 'no':
         bot.send_message(call.message.chat.id, 'Очень жаль что вам это не интересно 😭')
 
+baza_email = []
+
+@bot.message_handler(commands=['send_message'])
+def send_message(message):
+    try:
+        smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
+        smtpObj.starttls()
+        smtpObj.login("kolya.com145@gmail.com", "Kolya14102005") 
+        for i in baza_email:
+            smtpObj.sendmail("kolya.com145@gmail.com", "kolya.com145@gmail.com", i)
+    finally:
+        smtpObj.quit()
+        baza_email.clear()
+        bot.send_message(message.chat.id, 'Сообщения все отправлены и список очищен')
+
 @bot.message_handler(content_types=['text'])
 def all(message):
     if message.text.lower() == 'регистрация':
         bot.send_message(message.chat.id, 'Для регистрации укажите ваш email,куда мы сможем вам отправлять информацию 😏') 
 
     for baza in message.text:
-        baza_email = []
         if baza == '@':
             bot.send_message(message.chat.id, 'Спасибо,что остались с нами. Вы точно не пожалеете😉')
             bot.send_message(message.chat.id, 'Если хочешь узнать когда начнется рассылка -> Введи команду : /statistic')
-            baza_email.append(f'\n {message.text}')
-            date = datetime.now()
-            date_now_hour = date.hour
-            date_now_min = date.minute
-            if date_now_hour and date_now_min == 23:
-                try:
-                    smtpObj = smtplib.SMTP("smtp.gmail.com", 587) 
-                    smtpObj.starttls()
-                    smtpObj.login("kolya.com145@gmail.com", "Kolya14102005") 
-                    for i in baza_email:
-                        smtpObj.sendmail("kolya.com145@gmail.com", "kolya.com145@gmail.com", i)
-                finally:
-                    smtpObj.quit()          
+            baza_email.append(f'\n {message.text}')            
 
 if __name__ == "__main__":
     bot.infinity_polling()
