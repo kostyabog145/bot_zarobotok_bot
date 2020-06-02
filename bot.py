@@ -62,7 +62,7 @@ def all(message):
         if baza == '@':
             bot.send_message(message.chat.id, 'Спасибо,что остались с нами. Вы точно не пожалеете😉')
             bot.send_message(message.chat.id, 'Если хочешь узнать когда начнется рассылка -> Введи команду : /statistic')
-            baza_email.append(f'\n {message.text}')            
+            baza_email.append(message.text)            
 
 if __name__ == "__main__":
     bot.infinity_polling()
