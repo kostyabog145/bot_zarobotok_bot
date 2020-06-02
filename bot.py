@@ -36,6 +36,10 @@ def yes_or_no(call):
 
 baza_email = []
 
+@bot.message_handler(commands=['email'])
+def email_in_baza(message):
+    bot.send_message(message.chat.id, f'Email-адресса в базе : {baza_email}')
+
 @bot.message_handler(commands=['send_message'])
 def send_message(message):
     try:
