@@ -26,9 +26,11 @@ def commands(message):
     bot.send_message(message.chat.id, '/earn_money -> другие виды заработка')
     bot.send_message(message.chat.id, '/commands -> список всех команд бота')
 
+statistic_num = 994
+
 @bot.message_handler(commands=['statistic'])
 def statistic(message):
-    bot.send_message(message.chat.id, 'До начала рассылки осталось : 994/1000 email-адресов в базе')
+    bot.send_message(message.chat.id, f'До начала рассылки осталось : {statistic_num}/1000 email-адресов в базе')
 
 @bot.message_handler(commands=['earn_money'])
 def earn_money(message):
@@ -143,6 +145,11 @@ def all(message):
         link_game = 'http://catcut.net/ZodM'
         link_insta = 'http://instagram.com/bot_zarobotok_bot'
         bot.send_message(message.chat.id, f'Здравствуйте,я предлагаю вам заработать просто играя в игру (плачу я со своего кошелька). Все что вам нужно сделать - это перейти по ссылке {link_game} , зарегистрироваться в игре, зайти в игру(можно сразу выйти,но зайти обязательно),подождать 3 часа,снова зайти в игру и поиграть не меньше часа. Делаете все скриншоты и отправляете сюда {link_insta} , я проверю и если все правильно сделано заплачу 15р (ВАЖНО : плачу только 1 человеку,тоисть с одного и того же IP регистрировать много аккаунтов и присылать мне не нужно - оплаты НЕ БУДЕТ)')
+
+    elif message.text.lower() == 'statistic_change':
+        global statistic_num 
+        statistic_num = statistic_num - 1
+        bot.send_message(message.chat.id, 'Статистика отнялась на -1 ')    
 
     for baza in message.text:
         if baza == '@':
